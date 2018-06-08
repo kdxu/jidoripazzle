@@ -1,0 +1,65 @@
+<html>
+<head>
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<script language="JavaScript" type="text/javascript">
+var empty = 15;
+var Imgs = new Array(16);
+
+function swap(img1, img2) {
+	var tmp = img1.src;
+	img1.src = img2.src;
+	img2.src = tmp;
+}
+
+function check(img) {
+	var udlr = new Array(4);
+	var num = parseInt(img.name);
+	udlr[0] = num - 4;
+	udlr[1] = num + 4;
+	if ((num % 4) != 0) udlr[2] = num - 1;
+	if ((num % 4) != 3) udlr[3] = num + 1;
+	for (var i = 0; i < 4; i++) {
+		if (udlr[i] == empty) {
+			swap(img, document.images[udlr[i]]);
+			empty = num;
+		}
+	}
+}
+
+function shuffleImg(){
+	for (var i = 0; i < 300; i++ ) {
+		imgNum = Math.floor(Math.random() * 16);
+		check(document.images[imgNum]);
+	}
+}
+</script>
+
+</head>
+<body bgcolor="#FFFFFF">
+
+<h2>顔パズル</h2>
+<hr>
+<script language="JavaScript" type="text/javascript">
+document.write("<img src='15images/1.png' widh=125 ", "height=125 name='0' onclick=check(this)>");
+document.write("<img src='15images/2.png' width=125 ", "height=125  name='1' onclick=check(this)>");
+document.write("<img src='15images/3.png' width=125 ", "height=125 name='2' onclick=check(this)>");
+document.write("<img src='15images/4.png' width=125 ", "height=125  name='3' onclick=check(this)><br>");
+document.write("<img src='15images/5.png'  width=125 ","height=125 name='4' onclick=check(this)>");
+document.write("<img src='15images/6.png'  width=125 ","height=125 name='5' onclick=check(this)>");
+document.write("<img src='15images/7.png'  width=125 ","height=125 name='6' onclick=check(this)>");
+document.write("<img src='15images/8.png'  width=125 ","height=125 name='7' onclick=check(this)><br>");
+document.write("<img src='15images/9.png'  width=125 ","height=125 name='8' onclick=check(this)>");
+document.write("<img src='15images/10.png'  width=125 ","height=125 name='9' onclick=check(this)>");
+document.write("<img src='15images/11.png'  width=125 ", "height=125 name='10' onclick=check(this)>");
+document.write("<img src='15images/12.png'  width=125 ",	"height=125 name='11' onclick=check(this)><br>");
+document.write("<img src='15images/13.png'  width=125 ",	"height=125 name='12' onclick=check(this)>");
+document.write("<img src='15images/14.png'  width=125 ",	"height=125 name='13' onclick=check(this)>");
+document.write("<img src='15images/15.png'  width=125 ",	"height=125 name='14' onclick=check(this)>");
+document.write("<img src='15images/off.png'  width=125 ",	"height=125 name='15' onclick=check(this)>");
+</script>
+<form name="myForm"><p>
+<input name="shuffle" type="button" value="シャッフル" onclick="shuffleImg()">
+</p></form>
+</body>
+</html>
